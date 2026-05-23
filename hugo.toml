@@ -1,0 +1,53 @@
+baseURL = 'https://goutham1926.github.io/'
+title = "Gautam's Blogs"
+theme = "DoIt"
+defaultContentLanguage = "en"
+
+[params]
+  # Theme customization
+  defaultTheme = "auto" # Auto switches light/dark mode based on system settings
+  gitRepo = "https://github.com/GOUTHAM1926/GOUTHAM1926.github.io"
+  
+  # Search configuration using pagefind (highly optimized)
+  [params.search]
+    enable = true
+    type = "pagefind"
+  
+  # Header config
+  [params.header]
+    desktopMode = "fixed"
+    mobileMode = "auto"
+    [params.header.title]
+      name = "Gautam's Blogs"
+      pre = "<i class='fas fa-brain fa-fw'></i>" # Cool brain icon in title
+      
+  # Profile details on home page
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = "/images/avatar.webp" # We can add your profile picture later!
+      title = "Gautam Kumar Reddy"
+      subtitle = "Artificial Intelligence Researcher |  GPU Optimization Enthusiast"
+      social = true
+      
+  # Social accounts displayed on homepage
+  [params.social]
+    GitHub = "GOUTHAM1926"
+    Linkedin = "goutham1926"
+    Email = "goutham64840@gmail.com" # Put your preferred email here
+
+# Math rendering config for LaTeX formulas (perfect for AI equations!)
+[params.math]
+  enable = true
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Research Posts"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    name = "About Me"
+    url = "/about/"
+    weight = 2
