@@ -1,11 +1,11 @@
 baseURL = 'https://goutham1926.github.io/'
-title = "Gautam's Blogs"
+title = "Gautam's Blog"
 theme = "DoIt"
 defaultContentLanguage = "en"
 
 # Author configuration (used for the footer and metadata)
 [params.author]
-  name = "Gautam Kumar Reddy K"
+  name = "Gautam Reddy K"
   email = "goutham64840@gmail.com"
   link = "https://github.com/GOUTHAM1926"
 
@@ -24,16 +24,15 @@ defaultContentLanguage = "en"
     desktopMode = "fixed"
     mobileMode = "auto"
     [params.header.title]
-      name = "Gautam's Blogs"
-      pre = "<i class='fas fa-brain fa-fw'></i>" # Cool brain icon in title
+      name = "Home"
       
   # Profile details on home page
   [params.home]
     [params.home.profile]
       enable = true
       avatarURL = "/images/avatar.jpg" # Using the photo you provided
-      title = "Gautam Kumar Reddy K"
-      subtitle = "Artificial Intelligence Researcher |  GPU Optimization Enthusiast"
+      title = "Gautam's Blog"
+      subtitle = "Hello! Welcome to my blog!"
       social = true
       
   # Social accounts displayed on homepage
