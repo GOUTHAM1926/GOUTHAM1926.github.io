@@ -18,6 +18,7 @@
 10. [Advanced: Custom Domain Setup](#10-advanced-custom-domain-setup)
 11. [What to Showcase as an AI Researcher](#11-what-to-showcase-as-an-ai-researcher)
 12. [Adding a Comments System with Giscus](#12-adding-a-comments-system-with-giscus)
+13. [Troubleshooting & Common Pitfalls](#13-troubleshooting--common-pitfalls)
 
 ---
 
@@ -1176,6 +1177,62 @@ After someone leaves a comment on your blog, you can see it in two places:
 2. **On GitHub** — go to your repo → click the **Discussions** tab → you will see a thread for each blog post that has received comments
 
 You can edit, delete, pin, or lock any Discussion directly from GitHub. You are the repo owner, so you have full control.
+
+## 13. Troubleshooting & Common Pitfalls
+
+While setting up a Hugo + GitHub Pages site, it is easy to run into a few common configuration errors. Here are the most frequent ones and exactly how to fix them:
+
+### Pitfall 1: "DNS check unsuccessful" on Custom Domain
+
+**The Error:**
+In your GitHub repo `Settings -> Pages`, you type a domain (like `goutham1926.site`) into the "Custom domain" box, hit Save, and GitHub throws a red error:
+`Both goutham1926.site and its alternate name are improperly configured. Domain's DNS record could not be retrieved.`
+
+**Why It Happens:**
+GitHub provides the *hosting* for free, but it does NOT provide `.site`, `.dev`, or `.com` domain names for free. If you just type a domain name into that box, GitHub will try to connect to it, but the global internet registry (ICANN) will reject it because you haven't purchased it.
+
+**How to Fix It:**
+1. If you don't want to pay for a domain: Click **Remove** next to the custom domain box and leave it blank. Your free URL (`https://goutham1926.github.io`) will instantly start working again.
+2. If you want the domain: You must go to a registrar (like Namecheap or GoDaddy), pay for it (~$2-$15/year), and configure the DNS settings (as detailed in [Section 10](#10-advanced-custom-domain-setup)).
+
+### Pitfall 2: Website 404 Error (Because Repo is Private)
+
+**The Error:**
+You push all your code, you go to `https://yourname.github.io`, and you see a **404 Page Not Found** error saying *"There isn't a GitHub Pages site here."*
+
+**Why It Happens:**
+On a free GitHub account, **GitHub Pages only works for Public repositories**. If your repository is set to Private, GitHub completely disables the website hosting feature (unless you pay for GitHub Pro).
+
+**How to Fix It:**
+1. Go to your repository **Settings**.
+2. Scroll to the very bottom to the **Danger Zone**.
+3. Click **Change visibility** and set it to **Public**.
+4. Go to **Settings -> Pages** and ensure the Source is set to **GitHub Actions**. Wait 30 seconds, and your site will be live.
+
+### Pitfall 3: Author Name Missing from Footer
+
+**The Error:**
+You set `author = true` in `[params.footer]`, but the footer just shows `© 2026 | CC BY-NC 4.0` without your name.
+
+**Why It Happens:**
+Hugo and its themes are very strict about where configuration blocks go in `hugo.toml`. If you put `[author]` at the root level of your file, Hugo understands it, but the **DoIt theme specifically looks inside the `params` block**.
+
+**How to Fix It:**
+You must name the block `[params.author]`, not just `[author]`.
+
+❌ **Wrong:**
+```toml
+[author]
+  name = "Gautam Kumar Reddy K"
+```
+
+✅ **Correct:**
+```toml
+[params.author]
+  name = "Gautam Kumar Reddy K"
+  email = "your-email@example.com"
+  link = "https://github.com/your-username"
+```
 
 ---
 
