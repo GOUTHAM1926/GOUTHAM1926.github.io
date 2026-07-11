@@ -17,6 +17,7 @@
 9. [Writing Your First Blog Post](#9-writing-your-first-blog-post)
 10. [Advanced: Custom Domain Setup](#10-advanced-custom-domain-setup)
 11. [What to Showcase as an AI Researcher](#11-what-to-showcase-as-an-ai-researcher)
+12. [Adding a Comments System with Giscus](#12-adding-a-comments-system-with-giscus)
 
 ---
 
@@ -982,6 +983,199 @@ Blog Posts:
 ├── 📚 Tutorial & How-To Guides
 └── 💡 Research Ideas & Notes
 ```
+
+---
+
+## 12. Adding a Comments System with Giscus
+
+### What Is Giscus?
+
+**Giscus** is a free, open-source comments system that lets visitors leave comments and emoji reactions on your blog posts. It is the same tool that Yewentao uses on his blog.
+
+The clever part is that giscus does NOT need any database or server to store comments. Instead, it uses a feature built into GitHub called **GitHub Discussions** as its storage. So your comments live directly inside your own GitHub repository.
+
+### Why Giscus Instead of Something Else?
+
+There are many comment systems out there, but here is why giscus is the best choice for a Hugo + GitHub Pages site:
+
+| Comment System | How It Stores Comments | Ads/Tracking | Cost | Best For |
+|----------------|----------------------|--------------|------|----------|
+| **Disqus** | Their own servers | Yes, shows ads on free plan | Free with ads, paid without | WordPress blogs |
+| **Utterances** | GitHub Issues (older approach) | No | Free | Developers (but outdated) |
+| **Giscus** | GitHub Discussions (modern) | No | Free | Static sites like ours |
+| **WordPress** | Your own database + server | Depends | Paid hosting needed | WordPress only |
+| **Facebook Comments** | Facebook servers | Yes | Free | Facebook-heavy audiences |
+
+Giscus wins because:
+- **Zero cost** forever
+- **No ads**, no tracking, no cookies
+- **No database needed** — everything lives in your GitHub repo
+- **Dark mode support** — matches the DoIt theme automatically
+- **Emoji reactions** — visitors can react with thumbs up, heart, party, etc.
+- **You control everything** — you can moderate, edit, or delete comments directly from GitHub
+- **Visitors need a GitHub account** to comment — this is actually good for a tech/research blog because your audience (developers, researchers) already has GitHub accounts
+
+### How Giscus Works (Step by Step)
+
+Here is exactly what happens when someone visits your blog post and writes a comment:
+
+```
+1. Visitor opens your blog post (e.g., "Building CUDA Kernels")
+                    ↓
+2. Giscus loads at the bottom of the page
+                    ↓
+3. Giscus asks GitHub: "Is there a Discussion for this post?"
+                    ↓
+4a. If YES → Giscus fetches all existing comments and shows them
+4b. If NO  → Giscus waits (a Discussion will be created when the first comment arrives)
+                    ↓
+5. Visitor clicks "Sign in with GitHub" and types their comment
+                    ↓
+6. Giscus creates a new Discussion in YOUR repo's "Discussions" tab
+                    ↓
+7. The comment is now stored forever in your GitHub repo
+                    ↓
+8. Next visitor who opens the same post sees that comment automatically
+```
+
+So in simple words: **your GitHub repository becomes the database for your comments.**
+
+### How Giscus Maps Posts to Comments
+
+Giscus needs a way to know which comments belong to which blog post. It does this using a **mapping**. The most common mapping is `pathname`, which works like this:
+
+| Your Blog Post URL | GitHub Discussion Title |
+|--------------------|-----------------------|
+| `/posts/cuda-kernels/` | `posts/cuda-kernels/` |
+| `/posts/matrix-multiply/` | `posts/matrix-multiply/` |
+| `/about/` | `about/` |
+
+So each blog post gets its own separate Discussion thread. Comments on one post will never mix with comments on another post.
+
+### What You Need to Set Up Giscus
+
+To make giscus work on your site, you need **4 values** from GitHub:
+
+| Value | What It Is | Where You Get It |
+|-------|-----------|------------------|
+| `dataRepo` | Your repo name (owner/repo format) | You already know this: `GOUTHAM1926/GOUTHAM1926.github.io` |
+| `dataRepoId` | A unique ID that GitHub assigns to your repo | The giscus.app website gives you this |
+| `dataCategory` | The Discussion category to use for comments | You create this in your repo (usually called "Comments") |
+| `dataCategoryId` | A unique ID for that Discussion category | The giscus.app website gives you this |
+
+These 4 values go into your `hugo.toml` config file, and the DoIt theme handles the rest automatically.
+
+### Step-by-Step: Enable Giscus on Your Blog
+
+#### Step 1: Create the GitHub Repository (if not done yet)
+
+You need the `GOUTHAM1926.github.io` repository to exist on GitHub first. If you have not created it yet:
+1. Go to [github.com/new](https://github.com/new)
+2. Repository name: `GOUTHAM1926.github.io`
+3. Set to **Public** (giscus only works on public repos)
+4. Click **Create repository**
+
+#### Step 2: Enable Discussions on Your Repo
+
+1. Go to your repo page on GitHub: `https://github.com/GOUTHAM1926/GOUTHAM1926.github.io`
+2. Click **Settings** (the gear icon tab)
+3. Scroll down to the **Features** section
+4. Check the box next to **Discussions**
+5. Click **Save**
+
+Now your repo has a new "Discussions" tab where comments will be stored.
+
+#### Step 3: Create a "Comments" Category in Discussions
+
+1. Click the **Discussions** tab in your repo
+2. Click the **pencil icon** (edit categories) on the left sidebar
+3. Click **New category**
+4. Name it: **Comments**
+5. Description: "Blog post comments powered by giscus"
+6. Discussion Format: Choose **Announcement** (this means only giscus bot can create new threads, visitors can only reply — keeps things clean)
+7. Click **Create**
+
+#### Step 4: Install the Giscus App on GitHub
+
+1. Go to [github.com/apps/giscus](https://github.com/apps/giscus)
+2. Click **Install**
+3. Choose **Only select repositories** and pick `GOUTHAM1926.github.io`
+4. Click **Install**
+
+This gives giscus permission to create Discussions in your repo on behalf of visitors.
+
+#### Step 5: Get Your Config Values from giscus.app
+
+1. Go to [giscus.app](https://giscus.app)
+2. Under **Repository**, type: `GOUTHAM1926/GOUTHAM1926.github.io`
+3. If everything is correct, you will see a green checkmark saying "Success! This repository meets all of the above criteria."
+4. Under **Discussion Category**, select **Comments** (the one you just created)
+5. Under **Page ↔ Discussions Mapping**, select **Discussion title contains page pathname**
+6. Scroll down — giscus will show you a `<script>` tag with your config values
+
+From that script tag, copy these 4 values:
+- `data-repo` → this goes into `dataRepo`
+- `data-repo-id` → this goes into `dataRepoId`
+- `data-category` → this goes into `dataCategory`
+- `data-category-id` → this goes into `dataCategoryId`
+
+#### Step 6: Add Giscus Config to hugo.toml
+
+Open your `hugo.toml` file and add this section at the bottom:
+
+```toml
+# Comment system using Giscus (powered by GitHub Discussions)
+[params.page.comment]
+  enable = true
+  [params.page.comment.giscus]
+    enable = true
+    dataRepo = "GOUTHAM1926/GOUTHAM1926.github.io"
+    dataRepoId = "PASTE_YOUR_REPO_ID_HERE"          # from giscus.app
+    dataCategory = "Comments"
+    dataCategoryId = "PASTE_YOUR_CATEGORY_ID_HERE"   # from giscus.app
+    dataMapping = "pathname"
+    dataStrict = "0"
+    dataReactionsEnabled = "1"
+    dataEmitMetadata = "0"
+    dataInputPosition = "bottom"
+    lightTheme = "light"
+    darkTheme = "dark"
+    dataLang = "en"
+    dataLoading = "lazy"
+```
+
+Replace the two `PASTE_YOUR_..._HERE` values with the actual values you got from giscus.app in Step 5.
+
+#### Step 7: Test Locally
+
+Run `hugo server` and open a blog post in your browser. Scroll to the bottom — you should see the giscus comment box. If you are running locally (`localhost:1313`), giscus may show a warning that the origin does not match. This is normal and will work perfectly once you push to GitHub and the site goes live at `goutham1926.github.io`.
+
+### What Each Config Value Means
+
+| Config Key | What It Does |
+|------------|-------------|
+| `enable` | Turns giscus on (`true`) or off (`false`) |
+| `dataRepo` | Your GitHub repo in `owner/repo` format |
+| `dataRepoId` | Unique ID of your repo (GitHub assigns this internally) |
+| `dataCategory` | Name of the Discussion category (we created "Comments") |
+| `dataCategoryId` | Unique ID of that category |
+| `dataMapping` | How to match a blog post to a Discussion (`pathname` = use the URL path) |
+| `dataStrict` | `"0"` = fuzzy matching, `"1"` = exact match only |
+| `dataReactionsEnabled` | `"1"` = allow emoji reactions (👍 ❤️ 🎉 etc.) |
+| `dataEmitMetadata` | `"0"` = do not send extra metadata (keep it simple) |
+| `dataInputPosition` | `"bottom"` = comment box appears below existing comments |
+| `lightTheme` | Theme used when your site is in light mode |
+| `darkTheme` | Theme used when your site is in dark mode |
+| `dataLang` | Language for the giscus interface (`"en"` = English) |
+| `dataLoading` | `"lazy"` = only load giscus when the visitor scrolls down to it (saves bandwidth) |
+
+### Where Do Comments Actually Live?
+
+After someone leaves a comment on your blog, you can see it in two places:
+1. **On your website** — at the bottom of that blog post (visible to everyone)
+2. **On GitHub** — go to your repo → click the **Discussions** tab → you will see a thread for each blog post that has received comments
+
+You can edit, delete, pin, or lock any Discussion directly from GitHub. You are the repo owner, so you have full control.
 
 ---
 
