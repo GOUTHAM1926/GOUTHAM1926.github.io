@@ -31,7 +31,7 @@ defaultContentLanguage = "en"
   [params.home]
     [params.home.profile]
       enable = true
-      avatarURL = "/images/avatar.webp" # We can add your profile picture later!
+      avatarURL = "/images/avatar.jpg" # Using the photo you provided
       title = "Gautam Kumar Reddy K"
       subtitle = "Artificial Intelligence Researcher |  GPU Optimization Enthusiast"
       social = true

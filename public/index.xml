@@ -3,7 +3,8 @@
         <title>Gautam&#39;s Blogs</title>
         <link>http://localhost:1313/</link>
         <description>Gautam&#39;s Blogs</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>goutham64840@gmail.com (Gautam Kumar Reddy K)</managingEditor>
+            <webMaster>goutham64840@gmail.com (Gautam Kumar Reddy K)</webMaster>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         </channel>
 </rss>
