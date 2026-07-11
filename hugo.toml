@@ -3,6 +3,12 @@ title = "Gautam's Blogs"
 theme = "DoIt"
 defaultContentLanguage = "en"
 
+# Author configuration (used for the footer and metadata)
+[author]
+  name = "Gautam Kumar Reddy K"
+  email = "goutham64840@gmail.com"
+  link = "https://github.com/GOUTHAM1926"
+
 [params]
   # Theme customization
   defaultTheme = "auto" # Auto switches light/dark mode based on system settings
