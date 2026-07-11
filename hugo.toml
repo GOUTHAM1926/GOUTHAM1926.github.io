@@ -4,7 +4,7 @@ theme = "DoIt"
 defaultContentLanguage = "en"
 
 # Author configuration (used for the footer and metadata)
-[author]
+[params.author]
   name = "Gautam Kumar Reddy K"
   email = "goutham64840@gmail.com"
   link = "https://github.com/GOUTHAM1926"
