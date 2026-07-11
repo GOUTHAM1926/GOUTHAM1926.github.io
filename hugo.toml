@@ -26,7 +26,7 @@ defaultContentLanguage = "en"
     [params.home.profile]
       enable = true
       avatarURL = "/images/avatar.webp" # We can add your profile picture later!
-      title = "Gautam Kumar Reddy"
+      title = "Gautam Kumar Reddy K"
       subtitle = "Artificial Intelligence Researcher |  GPU Optimization Enthusiast"
       social = true
       
@@ -35,6 +35,15 @@ defaultContentLanguage = "en"
     GitHub = "GOUTHAM1926"
     Linkedin = "goutham1926"
     Email = "goutham64840@gmail.com" # Put your preferred email here
+
+  # Footer configuration (like Yewentao's)
+  [params.footer]
+    enable = true
+    hugo = false           # Hides "Powered by Hugo"
+    copyright = true       # Shows copyright symbol
+    author = true          # Shows your name
+    since = 2026           # Starting year of the blog (shows just 2026)
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
 # Math rendering config for LaTeX formulas (perfect for AI equations!)
 [params.math]
