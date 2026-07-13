@@ -54,6 +54,25 @@ defaultContentLanguage = "en"
 [params.math]
   enable = true
 
+  # Comment system using Giscus (powered by GitHub Discussions)
+  [params.page.comment]
+    enable = true
+    [params.page.comment.giscus]
+      enable = true
+      dataRepo = "GOUTHAM1926/GOUTHAM1926.github.io"
+      dataRepoId = "R_kgDOTVD68g"
+      dataCategory = "Comments"
+      dataCategoryId = "DIC_kwDOTVD68s4DBFN_"
+      dataMapping = "pathname"
+      dataStrict = "0"
+      dataReactionsEnabled = "1"
+      dataEmitMetadata = "0"
+      dataInputPosition = "bottom"
+      lightTheme = "light"
+      darkTheme = "dark"
+      dataLang = "en"
+      dataLoading = "lazy"
+
 [menu]
   [[menu.main]]
     identifier = "posts"
