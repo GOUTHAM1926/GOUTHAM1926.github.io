@@ -21,6 +21,7 @@ defaultContentLanguage = "en"
   
   # Header config
   [params.header]
+    themeChangeMode = "switch"
     desktopMode = "fixed"
     mobileMode = "auto"
     [params.header.title]
