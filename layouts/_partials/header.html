@@ -93,7 +93,9 @@
                 </div>
                 {{- else -}}
                 <button class="menu-item theme-switch" {{ printf "aria-label=%q" (T "switchTheme") | safeHTMLAttr }} title="{{ T "switchTheme" }}">
-                    {{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "moon") }}
+                    <span style="display: inline-block; transform: scaleX(-1);">
+                        {{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "moon") }}
+                    </span>
                 </button>
                 {{- end -}}
             </div>
@@ -180,7 +182,9 @@
             </div>
             {{- else -}}
             <button class="menu-item theme-switch tw:w-full" {{ printf "aria-label=%q" (T "switchTheme") | safeHTMLAttr }} title="{{ T "switchTheme" }}">
-                {{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "moon") }}
+                <span style="display: inline-block; transform: scaleX(-1);">
+                    {{ partial "plugin/fontawesome.html" (dict "Style" "solid" "Icon" "moon") }}
+                </span>
             </button>
             {{- end -}}
             {{- if hugo.IsMultilingual -}}
