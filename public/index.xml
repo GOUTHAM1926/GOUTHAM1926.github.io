@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Gautam&#39;s Blogs</title>
+        <title>Gautam&#39;s Blog</title>
         <link>http://localhost:1313/</link>
-        <description>Gautam&#39;s Blogs</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>goutham64840@gmail.com (Gautam Kumar Reddy K)</managingEditor>
-            <webMaster>goutham64840@gmail.com (Gautam Kumar Reddy K)</webMaster>
+        <description>Gautam&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>goutham64840@gmail.com (Gautam Reddy K)</managingEditor>
+            <webMaster>goutham64840@gmail.com (Gautam Reddy K)</webMaster>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         </channel>
 </rss>
