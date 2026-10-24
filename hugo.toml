@@ -34,6 +34,7 @@ defaultContentLanguage = "en"
       avatarURL = "/images/avatar.jpg" # Using the photo you provided
       title = "Gautam's Blog"
       subtitle = "Hello , Welcome to my blog!"
+      typeit = true
       social = true
       
   # Social accounts displayed on homepage
