@@ -20,6 +20,7 @@
 | 8 | Jul 14, 2026 | Chat 8: Full Status Review & Next Steps | `e40e5081-f8ba-4bf9-9fb4-cd3b90cc7e8a` |
 | 9 | Jul 18, 2026 | Chat 9: Consolidation — This File | `ee5d2c14-c648-4f1a-b6d4-5c6d5114a22c` |
 | 10 | Sep 17, 2026 | Chat 10: Metadata, CC License, & Typewriter Effect | `3900f95d-8d2d-49cd-9f73-23b3ae2be4fa` |
+| 11 | Oct 24, 2026 | Chat 11: About Me Page, Identity & Search Bar Fix | `763c8557-0390-48d0-8814-6948b831176f` |
 
 ---
 
@@ -3477,6 +3478,43 @@ I just went into your `hugo.toml` file and added `typeit = true` under your `[pa
 
 ---
 
-*Last updated: Sep 17, 2026*
-*Total conversations documented: 10*
-*Total development span: April 25 – Sep 17, 2026 (~5 months)*
+## Chat 11: About Me Page, Identity & Search Bar Fix
+
+**Date:** Oct 24, 2026 &nbsp; | &nbsp; **Conversation ID:** `763c8557-0390-48d0-8814-6948b831176f`
+
+---
+
+### Key Topics & Decisions
+
+1. **Crafting the About Me Page (`content/about.md`):**
+   - Built a comprehensive, professional About Me page inspired by minimal, clean researcher blogs (e.g., Yewentao).
+   - Omitted university/degree details per user preference, focusing purely on technical contributions, research, and engineering work.
+   - Incorporated the custom BluTrain paper ([arXiv:2606.24780](https://arxiv.org/abs/2606.24780)), highlighting native CPU and CUDA kernels, typed tensor module with autograd, caching allocator, MLIR-based compiler backend, and benchmark results against PyTorch (407K tokens/s vs 395K tokens/s, 22% memory reduction).
+   - Added the community-loved "GPU go brrrrr" philosophy tagline reflecting hardware-aware programming and silicon optimization.
+
+2. **Professional Title & Identity:**
+   - Evaluated "AI Researcher" vs. "AI Systems Researcher" vs. "Kernel & Performance Engineer".
+   - Concluded that **AI Systems Researcher and Kernel & Performance Engineer** is the most accurate, elite, and recognized title for framework building, custom CUDA/CPU kernels, and low-level hardware scaling (aligning with SysML / MLSys domains).
+
+3. **Writing & Content Rules:**
+   - **Zero Emojis**: Strictly prohibited emojis across blog content, headings, and markdown to preserve a clean, rigorous academic tone.
+   - Cleaned up formatting and ensured standard English punctuation.
+   - Removed temporary repository customization folders (`.agents/`) so no agent metadata leaks into the public GitHub repository.
+
+4. **Navigation & Theme Configuration (`hugo.toml`):**
+   - Renamed menu item from **"Research Posts"** to **"Posts"** for a cleaner top navigation bar.
+   - Retained standard contact links: **GitHub** ([@GOUTHAM1926](https://github.com/GOUTHAM1926)), **LinkedIn**, and **Email** (`goutham64840@gmail.com`).
+
+5. **Search Bar Troubleshooting (Fuse.js):**
+   - Identified why the search input had an infinite spinner: the previous configuration used `type = "pagefind"`, which required external Node indexing that resulted in a 404 for `/pagefind/pagefind.js`.
+   - Switched search to **Fuse.js** and added `[outputs] home = ["HTML", "RSS", "JSON"]` (matching Yewentao's setup). Hugo now automatically generates `index.json`, providing instant client-side fuzzy search.
+
+6. **Yewentao Translation Feature Analysis:**
+   - Investigated how Yewentao's bilingual switcher works. Confirmed it is **not Google Translate** or an automated script, but Hugo's native static **i18n multilingual engine** with manually authored parallel markdown files (`.en.md` and `.zh-cn.md`).
+
+---
+
+*Last updated: Oct 24, 2026*
+*Total conversations documented: 11*
+*Total development span: April 25 – Oct 24, 2026 (~6 months)*
+
