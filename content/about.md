@@ -17,7 +17,7 @@ My work centers around building and scaling deep learning systems from first pri
 - **Performance Engineering**: Profiling, benchmarking, and optimizing AI workloads to extract maximum throughput and minimum memory footprint from hardware ,,, ,
 - **AI Systems & Framework Architecture**: Building complete training frameworks from the ground up from first principles ,,, ,
 - **GPU Acceleration & Low-Level Systems**: Hardware-aware programming in C++ and CUDA, memory layout optimization, and systems-level engineering for compute-intensive workloads ,,, ,
-- **Distributed Training & LLM Systems**: Multi-mode parallelism strategies (Tensor Parallelism, Pipeline Parallelism, Context Parallelism with All-to-All, P2P, and AllGather backends) for training large language models at scale ,,, ,
+- **Distributed Training & LLM Systems**: Multi-mode parallelism strategies for training large language models at scale ,,, ,
 
 ## Publications
 

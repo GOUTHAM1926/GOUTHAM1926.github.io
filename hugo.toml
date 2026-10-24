@@ -3,6 +3,9 @@ title = "Gautam's Blog"
 theme = "DoIt"
 defaultContentLanguage = "en"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 # Author configuration (used for the footer and metadata)
 [params.author]
   name = "Gautam Reddy K"
@@ -14,10 +17,26 @@ defaultContentLanguage = "en"
   defaultTheme = "auto" # Auto switches light/dark mode based on system settings
   gitRepo = "https://github.com/GOUTHAM1926/GOUTHAM1926.github.io"
   
-  # Search configuration using pagefind (highly optimized)
+  # Search configuration using Fuse.js (fast client-side search, same as Yewentao)
   [params.search]
     enable = true
-    type = "pagefind"
+    type = "fuse"
+    contentLength = 4000
+    placeholder = "Search..."
+    maxResultLength = 10
+    snippetLength = 40
+    highlightTag = "em"
+    absoluteURL = false
+    [params.search.fuse]
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = true
+      useExtendedSearch = false
+      ignoreFieldNorm = false
   
   # Header config
   [params.header]
@@ -78,7 +97,7 @@ defaultContentLanguage = "en"
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "Research Posts"
+    name = "Posts"
     url = "/posts/"
     weight = 1
   [[menu.main]]
