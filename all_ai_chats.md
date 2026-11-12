@@ -21,6 +21,7 @@
 | 9 | Jul 18, 2026 | Chat 9: Consolidation — This File | `ee5d2c14-c648-4f1a-b6d4-5c6d5114a22c` |
 | 10 | Sep 17, 2026 | Chat 10: Metadata, CC License, & Typewriter Effect | `3900f95d-8d2d-49cd-9f73-23b3ae2be4fa` |
 | 11 | Oct 24, 2026 | Chat 11: About Me Page, Identity & Search Bar Fix | `763c8557-0390-48d0-8814-6948b831176f` |
+| 12 | Nov 12, 2026 | Chat 12: Status Review, Hugo Reinstall & About Me Expansion (AI Researcher) | `605d5a04-6ba6-4e89-8c73-c7ce38c7f454` |
 
 ---
 
@@ -3514,7 +3515,61 @@ I just went into your `hugo.toml` file and added `typeit = true` under your `[pa
 
 ---
 
-*Last updated: Oct 24, 2026*
-*Total conversations documented: 11*
-*Total development span: April 25 – Oct 24, 2026 (~6 months)*
+## Chat 12: Status Review, Hugo Reinstall & About Me Expansion (AI Researcher)
+
+**Date:** Nov 12, 2026 &nbsp; | &nbsp; **Conversation ID:** `605d5a04-6ba6-4e89-8c73-c7ce38c7f454`
+
+**Tool:** Claude Code (VS Code extension). Chats 1 to 11 were done in Antigravity (Gemini).
+
+---
+
+### Key Topics & Decisions
+
+1. **Antigravity error and switch of assistant:**
+   - Antigravity failed with "Agent execution terminated due to error" after 1 second when asked to read this file. This is a generic failure of Antigravity's agent runner (commonly quota limits, model capacity, MCP errors, or a bug in a specific Antigravity version). The Error ID is a unique ID for that one run, not a documented error code. The file size (about 150 KB) was not the cause.
+   - Work continued in Claude Code instead.
+
+2. **Full status review (from this file, the repo, and the live site):**
+   - Live and working: home page, About Me page, Giscus configuration, Fuse.js search index (`/index.json`), GitHub Actions deployment.
+   - `/posts/` returns 404 on the live site because no post exists yet (`content/` contains only `about.md`).
+   - The project folder now lives at `~/Downloads/Personal Blogs` (earlier chats refer to `~/Desktop/Personal Blogs`).
+
+3. **Hugo was missing and was reinstalled:**
+   - Cause: the operating system on this machine was reinstalled on Oct 20, 2026. The project folder was copied back, but installed programs were not, so `hugo` was gone.
+   - Fix: reinstalled Hugo **v0.161.1 extended** from the GitHub release `.deb`, the same version the deployment workflow uses (`.github/workflows/hugo.yml`). Not the `apt` version (0.123.7, too old) and not the `snap` version (0.169.0, newer than the workflow).
+   - A test build completed cleanly (9 pages, no errors).
+
+4. **About Me page expanded (`content/about.md`), commit `16908c7`, pushed and verified live:**
+   - Title changed from "AI Systems Researcher" to **AI Researcher** and **Kernels & Performance Engineer**. AI Researcher is the broad title and includes systems research.
+   - The role line now stands alone, followed by a new sentence: exploring artificial intelligence in all its breadth, plus building frameworks, writing the kernels that power them, and optimizing every layer of the stack.
+   - Italic paragraph: a new first sentence was added ("I question how models learn, tear architectures apart to see why they work, and chase ideas from the first equation to the final experiment."), and the original sentence now begins with "And I write raw CPU and CUDA kernels...".
+   - Five new bullets added at the top of "Research & Interests", above the five existing ones: Artificial Intelligence & Machine Learning, Modelling & Architectures, Training Dynamics & Optimization, Large Language Models, Mathematical Foundations.
+   - "About This Blog" was left unchanged. A proposal to mention AI history (from Alan Turing onwards) there was rejected: history will be one of the topics, not the stated main purpose of the blog.
+
+5. **Rules for the About page and for AI assistants (decided in this chat):**
+   - The About page describes the roles in their full scope. It is not limited to already published work; the blog is just starting and more work will be added.
+   - Scope must cover AI as a whole, not only neural networks or transformers.
+   - Existing text is not removed. New text is added to it and must match the page's existing voice (first person, energetic, short bullets, the same sentence endings as the surrounding text).
+   - Proposed wording is shown in chat first and goes into the file only after approval. A first attempt that added a separate formal "Research Focus" section without approval was rejected and reverted.
+   - Rules carried over from earlier chats still apply: the assistant never runs `git commit` or `git push` (it gives the commands, the user runs them), and no emojis in blog content.
+
+6. **Comparison with Yewentao's About page and home page (decided: keep ours as it is):**
+   - His About page shows an author line, two dates, a word count and a reading time because it is built as a post; ours is a plain page. The two dates are first published and last edited, the word count is the total words on the page, and the minutes are estimated reading time (not editing time). Decision: not needed on our About page.
+   - His greeting keeps a blinking `|` cursor after typing because his config has `[params.typeit]` with `duration = -1`. Decision: not needed.
+   - The "Search by Fuse.js" credit in the search results stays. A style rule to hide it was tried and removed again: the theme and Fuse.js are open source, so the credit is kept.
+
+7. **Stale local `hugo.toml` resolved:**
+   - The local working copy had search set back to `type = "pagefind"`, the `[outputs]` block removed, and the menu name back to "Research Posts", which would have undone the Chat 11 fixes if pushed. It was restored to the committed version with `git checkout -- hugo.toml`. The Fuse.js search fix itself was already pushed in Chat 11 and works on the live site.
+
+### Open Items (as of Nov 12, 2026)
+
+1. **First research post:** not written yet. This is the next main task and will also fix the `/posts/` 404.
+2. **`public/` folder:** it is tracked in git and gets rewritten by every local `hugo` or `hugo server` run, so it always shows as modified. GitHub Actions builds the site itself and does not use it. Avoid `git add .` until this is decided (for example by adding `public/` to a `.gitignore`).
+3. **Still pending from earlier chats:** favicons, a site description for search engines, the GitHub profile README, and an optional custom domain.
+
+---
+
+*Last updated: Nov 12, 2026*
+*Total conversations documented: 12*
+*Total development span: April 25 – Nov 12, 2026 (~6.5 months)*
 

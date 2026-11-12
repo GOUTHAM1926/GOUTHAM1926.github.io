@@ -29,7 +29,7 @@
 Think of two kinds of restaurants:
 
 | | **Dynamic Website** (e.g., WordPress) | **Static Website** (e.g., Hugo) |
-|---|---|---|
+| --- | --- | --- |
 | **Analogy** | A restaurant that cooks each dish **when you order** | A bakery that bakes everything **in advance** and just hands it to you |
 | **How it works** | Every time someone visits, the server **runs code** to build the page from a database | All pages are **pre-built** as plain HTML files and just served directly |
 | **Needs** | A database (MySQL), a backend language (PHP/Python), a running server | Just a folder of HTML/CSS/JS files — any file server works |
@@ -42,6 +42,7 @@ Think of two kinds of restaurants:
 **Static** = the content of the page **does not change based on who is viewing it or when**. The HTML file served to every visitor is identical. It was generated once, ahead of time.
 
 This does NOT mean the page can't have:
+
 - ✅ Animations, transitions, hover effects (these are client-side CSS/JS)
 - ✅ Dark mode toggle
 - ✅ Search functionality
@@ -53,6 +54,7 @@ It just means there's **no server-side computation** happening when someone visi
 ### Why This Matters for Researchers
 
 As a researcher, you want:
+
 1. **Zero maintenance** — no server to manage, no database to update, no PHP patches
 2. **Speed** — your papers and blog posts load instantly
 3. **Free hosting** — GitHub Pages gives you unlimited free hosting
@@ -93,6 +95,7 @@ graph LR
 ```
 
 1. **You write content** in Markdown — a simple text format:
+
    ```markdown
    # My Paper Summary
    
@@ -112,7 +115,7 @@ graph LR
 There are many static site generators (Jekyll, Gatsby, Next.js, etc.), but Hugo is popular because:
 
 | Feature | Hugo |
-|---------|------|
+| --------- | ------ |
 | **Speed** | Builds thousands of pages in < 1 second (written in Go) |
 | **No dependencies** | Single binary, no Node.js/Ruby/Python required |
 | **Themes** | Hundreds of beautiful themes available |
@@ -139,13 +142,13 @@ graph TD
 
 ### The Magic Repository Name
 
-The key is the **repository name**. If your GitHub username is `navin-research`, you create a repository called:
+The key is the **repository name**. If your GitHub username is `gautam-research`, you create a repository called:
 
 ```
-navin-research.github.io
+gautam-research.github.io
 ```
 
-GitHub automatically recognizes this naming pattern and serves whatever HTML files are in that repo as a website at `https://navin-research.github.io`.
+GitHub automatically recognizes this naming pattern and serves whatever HTML files are in that repo as a website at `https://gautam-research.github.io`.
 
 ### What You Get for Free
 
@@ -164,7 +167,7 @@ Let's trace exactly how Yewentao's website works, piece by piece:
 ### His Setup
 
 | Component | What He Uses |
-|-----------|-------------|
+| ----------- | ------------- |
 | **Static Site Generator** | Hugo |
 | **Theme** | LoveIt → DoIt (the maintained successor) |
 | **Hosting** | GitHub Pages |
@@ -211,6 +214,7 @@ graph TD
 ### His Blog Content (What He Showcases)
 
 Looking at his live site, he writes about:
+
 - 📄 **Paper summaries** (NCCL, AWQ, PyTorch, SGLang, SARATHI, S4, MARLIN)
 - 🔧 **Deep technical dives** (PyTorch autograd internals, CUDA)
 - 📊 **Contributions** (vLLM bi-weekly journal)
@@ -227,6 +231,7 @@ He organizes them into **categories** like `Paper_summary`, `Pytorch`, `Vllm`, `
 ### What "Static Files" Means Here
 
 In Hugo, **"static files"** = any file that is NOT a Markdown blog post. These are:
+
 - 📸 Images (PNG, JPG, GIF, SVG)
 - 📄 PDFs (your papers)
 - 📊 Diagrams, charts
@@ -284,7 +289,7 @@ Then reference it from **any** blog post with an **absolute path** (starting wit
 ### Summary
 
 | Method | Where files go | How to reference | Best for |
-|--------|---------------|-----------------|----------|
+| -------- | --------------- | ----------------- | ---------- |
 | **Method 1** (Relative) | Next to the post in `content/posts/...` | `![img](resources/file.png)` | Per-post images |
 | **Method 2** (Absolute) | In top-level `static/` folder | `![img](/path/to/file.png)` | Shared/global images |
 
@@ -295,6 +300,7 @@ Then reference it from **any** blog post with an **absolute path** (starting wit
 ### The Simple Explanation
 
 A **theme** is a pre-designed look-and-feel for your website. It defines:
+
 - Layout (where the title, sidebar, content, footer go)
 - Colors, fonts, spacing
 - Features (search, dark mode, table of contents, code highlighting)
@@ -312,6 +318,7 @@ Yewentao uses the **LoveIt** theme (which was later forked and maintained as **D
 | **DoIt** | [github.com/HEIGE-PCloud/DoIt](https://github.com/HEIGE-PCloud/DoIt) | Active fork, currently maintained |
 
 Features of this theme:
+
 - 🌓 Dark/light mode toggle
 - 🔍 Full-text search
 - 📋 Table of contents (auto-generated from headings)
@@ -324,7 +331,7 @@ Features of this theme:
 ### Other Great Themes for AI Researchers
 
 | Theme | Style | URL |
-|-------|-------|-----|
+| ------- | ------- | ----- |
 | **PaperMod** | Clean, minimal, fast | [github.com/adityatelange/hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod) |
 | **Academic (Wowchemy)** | Academic portfolio + publications | [github.com/wowchemy/wowchemy-hugo-themes](https://github.com/wowchemy/wowchemy-hugo-themes) |
 | **Stack** | Card-based, modern | [github.com/CaiJimmy/hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack) |
@@ -376,14 +383,16 @@ graph TB
 
 > [!NOTE]
 > There are two ways to do this:
+>
 > - **Method A: From Scratch** (the original way — how Yewentao built his) ← **RECOMMENDED**
 > - **Method B: Fork someone's repo** (shortcut — skip to the end of this section)
-> 
+>
 > We'll go with Method A — building from scratch. This is how real developers do it.
 
 ### Prerequisites
 
 You need:
+
 - A **GitHub account** (free at github.com)
 - **Git** installed on your computer (you likely already have this)
 - **Hugo** installed on your computer
@@ -405,6 +414,7 @@ hugo version
 > Make sure you have Hugo **extended** version (needed for SCSS/SASS support that many themes use). Check with `hugo version` — it should say "extended".
 
 If snap doesn't give you extended version:
+
 ```bash
 # Download the latest extended version from GitHub releases:
 # https://github.com/gohugoio/hugo/releases
@@ -632,6 +642,7 @@ __global__ void attention_forward_kernel(...) {
     // Your CUDA kernel code
 }
 ```
+
 ```
 
 > [!TIP]
@@ -894,7 +905,7 @@ Like Yewentao has `wentao.site` instead of `yewentao256.github.io`:
 
 Buy a domain from a registrar:
 - **Namecheap** (~₹800/year for .site domains)
-- **Google Domains** 
+- **Google Domains**
 - **Cloudflare Registrar** (at-cost pricing, cheapest)
 - **GoDaddy**
 
@@ -915,7 +926,7 @@ Value: YOUR-USERNAME.github.io
 
 Type: A
 Name: @
-Values: 
+Values:
   185.199.108.153
   185.199.109.153
   185.199.110.153
