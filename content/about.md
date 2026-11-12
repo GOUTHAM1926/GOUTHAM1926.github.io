@@ -11,6 +11,10 @@ I explore artificial intelligence in all its breadth, from the foundations of ma
 
 *I question how models learn, tear architectures apart to see why they work, and chase ideas from the first equation to the final experiment. And I write raw CPU and CUDA kernels, hunt down every wasted clock cycle, and engineer AI systems that squeeze every last TFLOP out of the silicon — because making GPUs go brrrrr is both the art and the science of scaling intelligence.*
 
+One thing I strongly believe ,,, ,
+
+> Until you can visualize it, you haven't understood it in whole.
+
 ## Research & Interests
 
 My work centers around building and scaling deep learning systems from first principles :
