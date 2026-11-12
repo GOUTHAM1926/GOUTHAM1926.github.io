@@ -5,14 +5,21 @@ date: 2026-10-24
 
 # Gautam Reddy K
 
-Hi! I am an **AI Systems Researcher** and **Kernels & Performance Engineer** — I build deep learning frameworks from scratch and optimize them at every layer of the stack ,,, ,
+Hi! I am an **AI Researcher** and **Kernels & Performance Engineer** ,,, ,
 
-*I write raw CPU and CUDA kernels, hunt down every wasted clock cycle, and engineer AI systems that squeeze every last TFLOP out of the silicon — because making GPUs go brrrrr is both the art and the science of scaling intelligence.*
+I explore artificial intelligence in all its breadth, from the foundations of machine intelligence to the models and algorithms that define it, and I build deep learning frameworks from scratch, write the kernels that power them, and optimize them at every layer of the stack ,,, ,
+
+*I question how models learn, tear architectures apart to see why they work, and chase ideas from the first equation to the final experiment. And I write raw CPU and CUDA kernels, hunt down every wasted clock cycle, and engineer AI systems that squeeze every last TFLOP out of the silicon — because making GPUs go brrrrr is both the art and the science of scaling intelligence.*
 
 ## Research & Interests
 
 My work centers around building and scaling deep learning systems from first principles :
 
+- **Artificial Intelligence & Machine Learning**: The full landscape of machine intelligence — from classical AI and learning theory to deep learning, and the paradigms still waiting to be discovered ,,, ,
+- **Modelling & Architectures**: Modelling intelligence and designing the architectures behind it — what they can represent, why they work, and what should come next ,,, ,
+- **Training Dynamics & Optimization**: Understanding how models actually learn — optimizers, loss landscapes, initialization, and what makes training stable and efficient ,,, ,
+- **Large Language Models**: The training, scaling, and evaluation of LLMs, and the mechanisms behind their capabilities ,,, ,
+- **Mathematical Foundations**: The mathematics underneath intelligence, worked out from first principles — linear algebra, calculus, probability, and optimization theory ,,, ,
 - **CUDA & CPU Kernel Development**: Designing and implementing custom GPU and CPU kernels for deep learning operations — from matmul libraries and tensor operations to attention mechanisms and optimizers ,,, ,
 - **Performance Engineering**: Profiling, benchmarking, and optimizing AI workloads to extract maximum throughput and minimum memory footprint from hardware ,,, ,
 - **AI Systems & Framework Architecture**: Building complete training frameworks from the ground up from first principles ,,, ,
