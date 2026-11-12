@@ -3561,11 +3561,20 @@ I just went into your `hugo.toml` file and added `typeit = true` under your `[pa
 7. **Stale local `hugo.toml` resolved:**
    - The local working copy had search set back to `type = "pagefind"`, the `[outputs]` block removed, and the menu name back to "Research Posts", which would have undone the Chat 11 fixes if pushed. It was restored to the committed version with `git checkout -- hugo.toml`. The Fuse.js search fix itself was already pushed in Chat 11 and works on the live site.
 
+8. **`public/` folder removed from git (commit `ce5805f`):**
+   - `public/` is the folder where Hugo writes the finished website. It was tracked in git, so every local preview made it show up as modified. GitHub Actions builds the site itself and never uses it.
+   - Fix: added a `.gitignore` containing `public/` and ran `git rm -r --cached public`. The folder stays on disk for local previews but git ignores it. The deploy after this change succeeded and the live site was verified. `git add .` is safe again.
+
+9. **How search works, and the Fuse.js settings (documented in Section 14 of `hugo_github_pages_guide.md`):**
+   - Fuse.js is an open-source JavaScript library that does fuzzy search inside the visitor's browser. Hugo writes `index.json` (all page titles, content and links) at build time; the browser downloads it and Fuse.js searches it locally, so no server is needed.
+   - Compared with Yewentao's config, only two values differ: `threshold` (ours `0.3`, his `0.05`) and `minMatchCharLength` (ours `2`, his `4`).
+   - Tested on his site: `dty` gives no results, `dtyp` finds all the dtype posts, because his minimum match length is 4. Ours allows short terms like `GPU`, `DDP`, `LLM`, at the cost of some noise (`pub` also highlights the `bu` in `robust`).
+   - Decision: keep ours (`0.3` and `2`). If results get noisy once there are many posts, lower `threshold` to around `0.1`.
+
 ### Open Items (as of Nov 12, 2026)
 
 1. **First research post:** not written yet. This is the next main task and will also fix the `/posts/` 404.
-2. **`public/` folder:** it is tracked in git and gets rewritten by every local `hugo` or `hugo server` run, so it always shows as modified. GitHub Actions builds the site itself and does not use it. Avoid `git add .` until this is decided (for example by adding `public/` to a `.gitignore`).
-3. **Still pending from earlier chats:** favicons, a site description for search engines, the GitHub profile README, and an optional custom domain.
+2. **Still pending from earlier chats:** favicons, a site description for search engines, the GitHub profile README, and an optional custom domain.
 
 ---
 

@@ -19,6 +19,7 @@
 11. [What to Showcase as an AI Researcher](#11-what-to-showcase-as-an-ai-researcher)
 12. [Adding a Comments System with Giscus](#12-adding-a-comments-system-with-giscus)
 13. [Troubleshooting & Common Pitfalls](#13-troubleshooting--common-pitfalls)
+14. [Site Search with Fuse.js](#14-site-search-with-fusejs)
 
 ---
 
@@ -1244,6 +1245,99 @@ You must name the block `[params.author]`, not just `[author]`.
   email = "your-email@example.com"
   link = "https://github.com/your-username"
 ```
+
+---
+
+## 14. Site Search with Fuse.js
+
+### What Is Fuse.js?
+
+**Fuse.js** is a small, free, open-source JavaScript library that does **fuzzy search inside the visitor's browser**. It is what makes the search bar on this blog work without any server or database. Yewentao's blog uses the same setup.
+
+"Fuzzy" means it finds matches even when the typed text is not exact. A partial word or a small typo can still find results.
+
+### How Search Works on This Blog (Step by Step)
+
+1. **At build time**, Hugo writes one file called `index.json`. It contains the title, content and link of every page on the blog.
+2. **When a visitor uses the search bar**, their browser downloads `index.json` and the Fuse.js library.
+3. **As they type**, Fuse.js scans that file inside the browser and shows the best-matching pages.
+
+No request goes to any server while searching. That is why this works on a static site hosted on GitHub Pages.
+
+### The Config in `hugo.toml`
+
+Two parts are needed. First, tell Hugo to generate `index.json`:
+
+```toml
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+```
+
+Second, turn on Fuse.js search in the theme settings:
+
+```toml
+  [params.search]
+    enable = true
+    type = "fuse"
+    contentLength = 4000
+    placeholder = "Search..."
+    maxResultLength = 10
+    snippetLength = 40
+    highlightTag = "em"
+    absoluteURL = false
+    [params.search.fuse]
+      isCaseSensitive = false
+      minMatchCharLength = 2
+      findAllMatches = false
+      location = 0
+      threshold = 0.3
+      distance = 100
+      ignoreLocation = true
+      useExtendedSearch = false
+      ignoreFieldNorm = false
+```
+
+### The Two Settings That Matter Most
+
+| Setting | What it controls | This blog | Yewentao's blog |
+| --- | --- | --- | --- |
+| `threshold` | How inexact a match may be. `0` means exact matches only, `1` means match almost anything | `0.3` | `0.05` |
+| `minMatchCharLength` | The shortest piece of text that counts as a match | `2` | `4` |
+
+All other search settings are the same on both blogs.
+
+**What the difference means in practice:**
+
+- **This blog (0.3 and 2):** forgiving of typos and short searches. Three-letter terms like `GPU`, `DDP` or `LLM` can be searched. The cost is some noise: searching `pub` also highlights the `bu` inside `robust`.
+- **Yewentao's blog (0.05 and 4):** almost exact matching, so results are very clean. But a search shorter than 4 letters finds nothing. Tested on his site: `dty` gives "No results found", while `dtyp` finds all the dtype posts.
+
+**Decision (Nov 12, 2026):** keep `0.3` and `2`. Short technical terms matter for this blog's topics. If results become noisy once there are many posts, lower `threshold` to around `0.1`. That is a one-line change.
+
+### Why Fuse.js and Not Pagefind?
+
+The DoIt theme supports three search engines: `algolia`, `fuse` and `pagefind`.
+
+- **Pagefind** needs an extra indexing step (`npx pagefind --site public`) run with Node after every build. The GitHub Actions workflow of this blog does not run that step.
+- **Fuse.js** needs nothing beyond the `index.json` file that Hugo already produces.
+
+### Pitfall: Search Bar Spins Forever
+
+**The Error:**
+You click the search bar, type something, and the loading spinner never stops. No results appear.
+
+**Why It Happens:**
+The config has `type = "pagefind"`, but no pagefind index was ever built. The browser asks for `/pagefind/pagefind.js`, gets a 404, and waits forever.
+
+**How to Fix It:**
+Set `type = "fuse"` and add the `[outputs]` block shown above. Then check that `https://your-site/index.json` opens in the browser. If it does, search will work.
+
+### The "Search by Fuse.js" Credit
+
+The small "Search by Fuse.js" line at the bottom of the search results is added by the DoIt theme. It can be hidden with a custom style rule, but this blog keeps it: both the theme and Fuse.js are open source, so the credit stays.
+
+### One Limit to Know
+
+The whole `index.json` file is downloaded when someone searches, and it grows as posts are added. For a personal blog with tens or a few hundred posts this is fine.
 
 ---
 
